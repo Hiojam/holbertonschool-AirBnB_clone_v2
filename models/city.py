@@ -4,6 +4,7 @@ import os
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from models.place import Place
 
 
 class City(BaseModel, Base):
@@ -20,7 +21,7 @@ class City(BaseModel, Base):
         def places(self):
             from models import storage
             place_list = []
-            for place in storage.all(place).values():
+            for place in storage.all(Place).values():
                 if place.city_id == self.id:
                     place_list.append(place)
             return place_list
