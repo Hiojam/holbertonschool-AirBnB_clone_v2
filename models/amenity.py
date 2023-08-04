@@ -7,7 +7,7 @@ from models.place import Place
 import os
 
 place_amenity = Table(
-    'places_amenities',
+    'place_amenity',
     Base.metadata,
     Column(
         'place_id', String(60), ForeignKey('places.id'), primary_key=True
