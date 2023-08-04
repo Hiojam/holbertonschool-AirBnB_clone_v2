@@ -223,7 +223,7 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            
+
             if type(storage).__name__ == 'DBStorage':
                 # Query the database using the session
                 session = storage._DBStorage__session()
@@ -232,7 +232,7 @@ class HBNBCommand(cmd.Cmd):
                 session.close()
             else:
                 objects = storage.all().values()
-            
+
             for obj in objects:
                 print(obj)
         else:
