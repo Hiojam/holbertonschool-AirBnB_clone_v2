@@ -13,10 +13,10 @@ class FileStorage:
         if (cls is None):
             return FileStorage.__objects
 
-        filtered_objects = []
-        for obj in FileStorage.__objects.values():
-            if (type(obj) == cls):
-                filtered_objects.append(obj)
+        filtered_objects = {}
+        for obj_id, obj in FileStorage.__objects.items():
+            if isinstance(obj, cls):
+                filtered_objects[obj_id] = obj
         return filtered_objects
 
     def new(self, obj):
