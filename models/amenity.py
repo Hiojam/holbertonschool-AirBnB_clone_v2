@@ -7,7 +7,7 @@ from models.place import Place
 import os
 
 place_amenity = Table(
-    'place_amenity',
+    'places_amenities',
     Base.metadata,
     Column(
         'place_id', String(60), ForeignKey('places.id'), primary_key=True
@@ -24,12 +24,14 @@ class Amenity(BaseModel, Base):
     __tablename__ = 'amenities'
 
     name = Column(String(128), nullable=False)
-
+    
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        place_amenities = relationship(
-            "Place", secondary=place_amenity,
-            backref="amenities", viewonly=False
-            )
+        places_amenities = relationship(
+            "Place",
+            secondary=place_amenity,
+            back_populates="amenities",
+            viewonly=False
+        )
     else:
         @property
         def place_amenities(self):
