@@ -22,7 +22,6 @@ def C(text):
     return f"C {text}".replace("_", " ")
 
 
-
 if __name__ == "__main__":
     """Starts a web app"""
     app.run(debug=True, host="0.0.0.0", port=5000)
