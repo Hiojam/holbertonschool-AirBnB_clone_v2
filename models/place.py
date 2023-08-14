@@ -22,8 +22,9 @@ class Place(BaseModel, Base):
     """Class representing the Place table"""
     __tablename__ = 'places'
 
-    city_id = Column(String(60), nullable=False)
-    user_id = Column(String(60), nullable=False)
+    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    amenity_id = []
     name = Column(String(128), nullable=False)
     description = Column(String(1024))
     number_rooms = Column(Integer, nullable=False, default=0)
@@ -37,10 +38,12 @@ class Place(BaseModel, Base):
         reviews = relationship("Review",
                                backref="place",
                                cascade="all, delete")
-        amenities = relationship("Amenity",
-                                 secondary=place_amenity,
-                                 backref="place_amenities",
-                                 viewonly=False)
+        amenities = relationship(
+            "Amenity",
+            secondary=place_amenity,
+            back_populates="places_amenities",
+            viewonly=False
+            )
     else:
         @property
         def reviews(self):
@@ -57,7 +60,7 @@ class Place(BaseModel, Base):
             from models import storage
             from models.amenity import Amenity
             amenity_list = []
-            for amenity_id in self.amenity_ids:
+            for amenity_id in self.amenity_id:
                 amenity = storage.get(Amenity, amenity_id)
                 if amenity:
                     amenity_list.append(amenity)
