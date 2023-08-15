@@ -14,6 +14,10 @@ guillaume@ubuntu:~$ curl 0.0.0.0:5000/number_odd_or_even/32 ; echo ""
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-        <H1>Number: 32 is even</H1>
+        {%if number % 2 == 0 %}
+        <H1>Number: {{n}} is even</H1>
+        {% elif number % 2 != 0 %}
+        <H1>Number: {{number}} is odd</H1>
+        {% endif %}
     </BODY>
 </HTML>
