@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>States</H1>
+        <UL>
+            {% for index in dicc.values() |sort(attribute="name") %}
+            <li>{{ index.id }}: <B>{{index.name}}</B>></li>
+            {% endfor %}
+        </UL>
+    </BODY>
+</HTML>
