@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def estado():
+def app_teardown_appcontext(self):
     storage.close()
 
 
